@@ -1,9 +1,14 @@
 package br.com.kevinmoura.todolist.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,17 +22,19 @@ public class User {
     private String email;
     private String usuario;
     private String senha;
-    // private List<Todo> todoList;
+    
+    @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Todo> todoList = new ArrayList<>();
 
     public User() {
     }
 
-    public User(String nome, String email, String usuario, String senha) {
+    public User(String nome, String email, String usuario, String senha, List<Todo> todoList) {
         this.nome = nome;
         this.email = email;
         this.usuario = usuario;
         this.senha = senha;
-        // this.todoList = todoList;
+        this.todoList = todoList;
     }
 
     public Long getId() {
@@ -66,13 +73,13 @@ public class User {
         this.senha = senha;
     }
 
-    // public List<Todo> getTodoList() {
-    //     return todoList;
-    // }
+    public List<Todo> getTodoList() {
+        return todoList;
+    }
 
-    // public void setTodoList(List<Todo> todoList) {
-    //     this.todoList = todoList;
-    // }
+    public void setTodoList(List<Todo> todoList) {
+        this.todoList = todoList;
+    }
 
     @Override
     public int hashCode() {

@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,14 +20,20 @@ public class Todo {
     private String descricao;
     private int prioridade;
 
-    public Todo(){}
+    @ManyToOne
+	@JoinColumn(name="usuario_id")
+    private User usuario;
 
-    public Todo(Long id, String nome, boolean realizado, String descricao, int prioridade) {
+    public Todo() {
+    }
+
+    public Todo(Long id, String nome, boolean realizado, String descricao, int prioridade, User usuario) {
         this.id = id;
         this.nome = nome;
         this.realizado = realizado;
         this.descricao = descricao;
         this.prioridade = prioridade;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -68,6 +76,14 @@ public class Todo {
         this.prioridade = prioridade;
     }
 
+    public User getUser() {
+        return usuario;
+    }
+
+    public void setUser(User usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -93,5 +109,4 @@ public class Todo {
         return true;
     }
 
-    
 }
