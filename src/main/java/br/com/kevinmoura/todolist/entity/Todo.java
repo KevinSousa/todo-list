@@ -21,7 +21,7 @@ public class Todo {
     private int prioridade;
 
     @ManyToOne
-	@JoinColumn(name="usuario_id")
+    @JoinColumn(name = "usuario_id")
     private User usuario;
 
     public Todo() {
@@ -76,11 +76,11 @@ public class Todo {
         this.prioridade = prioridade;
     }
 
-    public User getUser() {
+    public User getUsuario() {
         return usuario;
     }
 
-    public void setUser(User usuario) {
+    public void setUsuario(User usuario) {
         this.usuario = usuario;
     }
 

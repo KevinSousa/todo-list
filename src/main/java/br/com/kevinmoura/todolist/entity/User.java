@@ -3,6 +3,7 @@ package br.com.kevinmoura.todolist.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class User {
     private String email;
     private String usuario;
     private String senha;
-    
+    @JsonIgnore
     @OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Todo> todoList = new ArrayList<>();
 
